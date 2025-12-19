@@ -1,4 +1,5 @@
-const url = 'https://genshin.jmp.blue/characters'
+const url = "https://www.amiiboapi.com/api/amiibo/?gameseries=Animal%20Crossing";
+
 async function getData(url) {
   try {
     const response = await fetch(url);
@@ -8,20 +9,18 @@ async function getData(url) {
     }
 
     const data = await response.json();
-      console.log(data)
-
-    // extract  object from the API response
-    const characters = data.result[0];
+    console.log(data)
 
     const container = document.querySelector(".container");
     container.innerHTML="";
 
-    characters.forEach(character => {
+    data.amiibo.forEach(character => {
       const card = document.createElement("div");
       card.classList.add("card");
 
-      card.innerHTML = `
+       card.innerHTML = `
         <h3>${character.name}</h3>
+        <img src="${character.image}">
       `;
 
       container.appendChild(card);
