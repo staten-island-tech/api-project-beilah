@@ -1,26 +1,27 @@
-const url = "https://www.amiiboapi.com/api/amiibo/?gameseries=Animal%20Crossing";
+const url = '/hsr/api/v1/characters';
 
 async function getData(url) {
   try {
     const response = await fetch(url);
 
     if (response.status !== 200) {
-      throw new Error(`error Status: ${response.status}`);
+      throw new Error(`Error status: ${response.status}`);
     }
 
-    const data = await response.json();
-    console.log(data)
+    const result = await response.json();
+    console.log(result);
 
     const container = document.querySelector(".container");
-    container.innerHTML="";
+    container.innerHTML = "";
 
-    data.amiibo.forEach(character => {
+    result.forEach(character => {
       const card = document.createElement("div");
       card.classList.add("card");
-
-       card.innerHTML = `
+      image = character.img
+      card.innerHTML = `
         <h3>${character.name}</h3>
-        <img src="${character.image}">
+        <img src="${image}" alt="${character.name}">
+        <p>${character.element} • ${character.path}</p>
       `;
 
       container.appendChild(card);
