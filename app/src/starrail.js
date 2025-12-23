@@ -1,3 +1,5 @@
+import './styles.css'
+
 function getWikiaImage(url) {
   // Remove query params (?cb=...)
   let cleanUrl = url.split("?")[0];
@@ -42,11 +44,10 @@ async function getData(url) {
       }
 
       if (character.name === "Trailblazer") {
-  image = "/images/trailblazer.png"; // your local or hosted image
-} else if (character.name === "March 7th") {
-  image = "/images/march7th.png"; // your local or hosted image
-}
-
+        image = "./trailblazer.png"; // your local or hosted image
+      } else if (character.name === "March_7th") {
+        image = "./march7th.png"; // your local or hosted image
+      }
 
       card.innerHTML = `
         <h3>${character.name}</h3>
