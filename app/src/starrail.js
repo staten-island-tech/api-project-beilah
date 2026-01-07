@@ -10,6 +10,7 @@ async function getData(url) {
       throw new Error(`Error status: ${response.status}`);
     }
 
+    
     const result = await response.json();
     console.log(result);
 
@@ -20,34 +21,28 @@ async function getData(url) {
       const card = document.createElement("div");
       card.classList.add("card");
 
-      card.innerHTML = `
-        <h3 class="epName">${episode.name}</h3>
-        <img 
-          src="${episode.image}" 
-          alt="${episode.name}" 
-          onerror="this.src='/placeholder.png'"
-        >
-        <h4>Season: ${episode.season} • Episode: ${episode.episode} • Overall: ${episode.overall}</h4>
-        <button class="moreInfo">View More Information</button>
-      `;
-      container.appendChild(card);
-    });
+      const button = document.createElement("button");
+      button.textContent = "View More Information";
+      button.classList.add("moreInfo");
 
-      document.querySelectorAll(".moreInfo").forEach((button) => {
-        button.addEventListener("click", (event) => {
-          container.innerHTML = "";
-
-          const info = event.target.parentElement;
-          const epName = info.querySelector(".epName").textContent;
-
-            const item = event.target.closest(".card");
-            console.log(item);
-          container.innerHTML = `
-            <h3>${epName}</h3>
-          `;
-        });
+      button.addEventListener("click", () => {
+        container.innerHTML = `
+      <h3>${episode.name}</h3>
+      <img src="${episode.image}">
+      <p>Air Date: ${episode.airdate}</p>
+      <p>Storyboard: ${episode.storyboard}</p>
+      <p>Written By: ${episode.writtenby}</p>
+      <a href="${episode.url}" target="_blank">Episode Page</a>
+    `;
       });
 
+      card.innerHTML = `
+    <h3>${episode.name}</h3>
+    <img src="${episode.image}">
+  `;
+      card.appendChild(button);
+      container.appendChild(card);
+    });
   } catch (error) {
     console.error("Error:", error);
   }
