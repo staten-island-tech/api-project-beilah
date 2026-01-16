@@ -1,4 +1,4 @@
-const url = "http://ponyapi.net/v1/episode/all";
+const url = "https://ponyapi.net/v1/episode/all";
 
 async function getData(url) {
     try {
